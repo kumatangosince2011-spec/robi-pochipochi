@@ -5,23 +5,34 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>ロビぽち</title>
 <style>
-:root{color-scheme:dark;--bg:#11131a;--card:#1b1e29;--line:#34394a;--text:#f7f3f8;--muted:#b9b3bf;--accent:#e8b8dc}
+:root{color-scheme:dark;--ink:#f9f5fb;--muted:#bcb5c5;--line:#4a4058;--glass:rgba(29,25,39,.78);--violet:#a887c8;--rose:#dca8c9}
 *{box-sizing:border-box}
-body{margin:0;min-height:100svh;background:radial-gradient(circle at top,#242031 0,#11131a 42%);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-main{width:min(680px,100%);margin:auto;padding:calc(24px + env(safe-area-inset-top)) 18px calc(30px + env(safe-area-inset-bottom))}
-h1{font-size:28px;margin:10px 0 5px;text-align:center;letter-spacing:.04em}
-.sub{text-align:center;color:var(--muted);font-size:13px;margin:0 0 22px}
-.card{background:rgba(27,30,41,.94);border:1px solid var(--line);border-radius:22px;padding:22px 18px;min-height:184px;display:flex;align-items:center;justify-content:center;box-shadow:0 14px 35px #0005}
-#line{font-size:18px;line-height:1.85;text-align:center;white-space:pre-wrap;margin:0}
+body{margin:0;min-height:100svh;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif;background:
+radial-gradient(circle at 15% 8%,rgba(162,116,184,.22),transparent 29%),
+radial-gradient(circle at 88% 24%,rgba(103,83,146,.22),transparent 31%),
+linear-gradient(160deg,#17131e 0%,#21192a 48%,#10131b 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.45;background-image:radial-gradient(circle,rgba(255,255,255,.7) 0 1px,transparent 1.5px);background-size:43px 43px}
+main{position:relative;width:min(680px,100%);margin:auto;padding:calc(28px + env(safe-area-inset-top)) 18px calc(34px + env(safe-area-inset-bottom))}
+.mark{width:54px;height:54px;margin:0 auto 10px;border:1px solid #725f82;border-radius:19px;display:grid;place-items:center;background:linear-gradient(145deg,#2b2235,#18151f);box-shadow:0 10px 35px #0007,inset 0 0 22px #9f76bd18;font-size:25px}
+h1{font-size:29px;margin:0 0 5px;text-align:center;letter-spacing:.08em}
+.sub{text-align:center;color:var(--muted);font-size:13px;margin:0 0 22px;letter-spacing:.04em}
+.card{position:relative;overflow:hidden;background:var(--glass);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:26px;padding:30px 22px;min-height:210px;display:flex;align-items:center;justify-content:center;box-shadow:0 20px 50px #0007,inset 0 1px #ffffff10}
+.card:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;right:-90px;bottom:-105px;background:#b986bf12;box-shadow:0 0 80px #c792d020}
+#line{position:relative;z-index:1;font-size:18px;line-height:1.9;text-align:center;white-space:pre-wrap;margin:0;text-wrap:pretty}
 .placeholder{color:var(--muted)}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-button{appearance:none;border:1px solid var(--line);background:#222634;color:var(--text);border-radius:17px;min-height:68px;padding:10px 8px;font-size:17px;font-weight:700;box-shadow:0 5px 0 #0b0c11;touch-action:manipulation}
-button:active{transform:translateY(3px);box-shadow:0 2px 0 #0b0c11}
-.count{display:block;margin-top:5px;font-size:11px;font-weight:500;color:var(--muted)}
-.note{text-align:center;color:var(--muted);font-size:11px;margin-top:17px}
+button{appearance:none;border:1px solid #4c4259;background:linear-gradient(160deg,#2c2636,#211d2b);color:var(--ink);border-radius:19px;min-height:76px;padding:11px 8px;font-size:16px;font-weight:700;box-shadow:0 7px 18px #0005,inset 0 1px #ffffff0c;touch-action:manipulation;transition:.12s transform,.12s border-color}
+button:active{transform:scale(.975);border-color:#9679a9}
+.count{display:block;margin-top:6px;font-size:10px;font-weight:500;color:var(--muted);letter-spacing:.06em}
+.note{text-align:center;color:#9d94a6;font-size:10px;margin:17px 0 0;letter-spacing:.12em}
+.dock{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:13px}
+.dock button{min-height:48px;font-size:12px;font-weight:600;color:#aaa2b2;background:#1c1922;border-style:dashed;box-shadow:none}
+.dock button:disabled{opacity:.72}
+@media(max-width:380px){#line{font-size:17px}.grid{gap:10px}button{font-size:15px}}
 </style>
 </head>
 <body><main>
+<div class="mark">🦦</div>
 <h1>ロビぽち</h1>
 <p class="sub">今日も、ちょっと会いにきて。</p>
 <section class="card"><p id="line" class="placeholder">どれか、ぽち。</p></section>
@@ -31,7 +42,11 @@ button:active{transform:translateY(3px);box-shadow:0 2px 0 #0b0c11}
 <button data-key="te">🤝 手ぇ繋ぐ<span class="count"></span></button>
 <button data-key="uranai">🔮 今日の運勢<span class="count"></span></button>
 </div>
-<p class="note">first build · 80 lines</p>
+<div class="dock">
+<button disabled>◇ ぷかもぐ収蔵庫<br><span class="count">準備中</span></button>
+<button disabled>✉ Robi Signature<br><span class="count">準備中</span></button>
+</div>
+<p class="note">SECOND BUILD · 80 LINES</p>
 </main>
 <script>
 const lines={
