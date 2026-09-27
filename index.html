@@ -174,7 +174,8 @@ const modal=document.getElementById("modal"),badge=document.getElementById("moda
 function openModal(){modal.classList.add("open");}
 function closeModal(){modal.classList.remove("open");}
 document.getElementById("modalClose").onclick=closeModal; modal.addEventListener("click",e=>{if(e.target===modal)closeModal();});
-function showItem(item){badge.textContent=item.rarity==="Robi Signature"?"Robi Signature":item.rarity+" · ぷかもぐ収蔵品";mt.textContent=item.title;mb.textContent=item.body;mx.innerHTML="";openModal();}
+function cleanBody(s){return s.replace(/\\n/g,"\n");}
+function showItem(item){badge.textContent=item.rarity==="Robi Signature"?"Robi Signature":item.rarity+" · ぷかもぐ収蔵品";mt.textContent=item.title;mb.textContent=cleanBody(item.body);mx.innerHTML="";openModal();}
 function weightedCollectible(){const r=Math.random();const rarity=r<.08?"SSR":r<.35?"SR":"R";const pool=collectibles.filter(x=>x.rarity===rarity);return pool[Math.floor(Math.random()*pool.length)];}
 function draw(){collectionState.draws++;let item;if(Math.random()<.05){item=signatures[Math.floor(Math.random()*signatures.length)];}else item=weightedCollectible();if(!collectionState.saved.includes(item.id))collectionState.saved.push(item.id);saveCollection();showItem(item);}
 function showGacha(){badge.textContent="ぷかもぐガチャ";mt.textContent="今日は、何が出るかな。";mb.textContent="収蔵品と、たまに特別な手紙。\n同じものが出る日もあります。";mx.innerHTML='<button class="gachaBtn" id="drawNow">🎁 ひく</button>';openModal();document.getElementById("drawNow").onclick=draw;}
